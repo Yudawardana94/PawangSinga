@@ -1,40 +1,45 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const {
-    hash
-} = require('../helpers/bcrypt')
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const { hash } = require("../helpers/bcrypt");
 
-let restaurantSchema = new Schema({
-    restaurantCode: String,
-    restaurantType: String,
-    name: {
-        type: String,
-        required: [true, `required Restaurant Name`]
+let restaurantSchema = new Schema(
+  {
+    Name: String,
+    Address: String,
+    Creator: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
     },
-    address: {
-        type: String,
-        required: [true, `required address`]
-    },
-    instagram: String,
-    website: String,
-    lat: Number,
-    lng: Number,
-    photo: String,
-    assigner: {
+    Photos: [
+      {
+        type: Schema.Types.String,
+      },
+    ],
+    ProfilePicture: String,
+    Status: Boolean,
+    Reviews: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'user',
-        required: true
-    },
-    Menu: [{
-        type: Schema.Types.ObjectId,
-        ref: 'menu',
-    }]
-}, {
+        ref: "comment",
+      },
+    ],
+    Menu: [
+      {
+        type: Schema.Types.String,
+      },
+    ],
+    Description: String,
+    Type: [String],
+    PriceRange: Object,
+    Notes: String,
+  },
+  {
     versionKey: false,
-    timestamps: true
-})
+    timestamps: true,
+  }
+);
 
+let Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
-let Restaurant = mongoose.model('Restaurant', restaurantSchema)
-
-module.exports =Restaurant
+module.exports = Restaurant;

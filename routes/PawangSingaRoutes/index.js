@@ -1,14 +1,14 @@
-const router = require('express').Router()
-const menuRoutes = require('./menu')
-const restaurantRoutes = require('./restaurant')
-const userRoutes = require('../user')
+const router = require("express").Router();
+const commentRoutes = require("./comment");
+const restaurantRoutes = require("./restaurant");
+const userRoutes = require("../user");
 
-router.use('/menu', menuRoutes)
-router.use('/rest', restaurantRoutes)
-router.use('/user', userRoutes)
+router.use("/comment", commentRoutes);
+router.use("/rest", restaurantRoutes);
+router.use("/user", userRoutes);
 
-router.get('/*',(req,res)=> {
-    res.send("Hello From pawang singa app !!")
-})
+router.get("/*", (req, res) => {
+  res.send("Hello From pawang singa app !!");
+});
 
-module.exports = router
+module.exports = router;
