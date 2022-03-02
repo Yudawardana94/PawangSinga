@@ -31,5 +31,5 @@ app.use('/', route)
 // app.use('/', errHandler)
 
 app.listen(port, () => {
-    console.log(`Connected to port: ${port} !!!`)
+    console.log(`Connection to port: ${port} successfully coonected !!!`)
 })
