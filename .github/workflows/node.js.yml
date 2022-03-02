@@ -12,6 +12,17 @@ jobs:
       - name: Greeting
         run: echo "Hello, world!"
 
+      - name: run npm install
+        run: npm install
+        
+      - name: run npm run lint
+        run: npm run lint
+        
+      - name: run npm run build
+        run: npm run build
+        
+      - name: run npm test
+        run: npm test
+      
       - name: Another greeting
         run: echo "Hello, world!"
-        
