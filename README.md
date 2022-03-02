@@ -1,2 +1,2 @@
 # PawangSinga
-new app to help chose where to eat
+new app to help chose where to eat adioss~
