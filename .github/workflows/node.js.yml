@@ -1,4 +1,4 @@
-name: CI
+name: Node CI
 
 on: push
 
@@ -7,11 +7,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
-      - name: Greeting
-        run: echo "Hello, world!"
+      - name: Install 🔧
+        run: npm install
 
-      - name: Another greeting
-        run: echo "Hello, world!"
-        
+      - name: Lint 🧐
+        run: npm run lint
+
+      - name: Build 🏗️
+        run: npm run build
+
+      - name: Test 🚨
+        run: npm test
