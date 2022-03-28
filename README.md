@@ -1,7 +1,7 @@
 ### Server repository 
 MonoRepository to accomodate some private project BE service 
 
-##CHECK UPDATE #1
+## CHECK UPDATE #1
 
 ## PawangSinga
 Apps to remind us where to eat and get recommendation to eat based on our wishlist.
