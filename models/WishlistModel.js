@@ -24,8 +24,8 @@ let wishlistSchema = new Schema(
     },
     Status: {
       type: String,
-      enum: ["Listed", "Conquered", "Unlisted"],
-      default: "Listed",
+      enum: ["listed", "conquered", "unlisted"],
+      default: "listed",
     },
   },
   {

@@ -3,12 +3,13 @@ const RestaurantController = require("../../controllers/PawangSinga/restaurantCo
 
 // READ
 router.get("/", RestaurantController.findAll);
+router.get("/search", RestaurantController.search)
 router.get("/:id", RestaurantController.findById);
 // CREATE
 router.post("/", RestaurantController.create);
 // DELETE
-router.delete("/:id");
+router.delete("/:id", RestaurantController.unlist);
 // UPDATE
-router.put("/:id");
+router.put("/:id",RestaurantController.update);
 
 module.exports = router;

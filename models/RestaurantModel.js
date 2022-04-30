@@ -33,12 +33,23 @@ let restaurantSchema = new Schema(
     Type: [String],
     PriceRange: Object,
     Notes: String,
+    Visibility: {
+      type: String,
+      enum: ["listed", "unlisted"],
+      default: "listed",
+    },
+    SocialMedia: [{
+      type: String
+    }]
   },
   {
     versionKey: false,
     timestamps: true,
   }
 );
+
+restaurantSchema.index({'$**': 'text'});
+
 
 let Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
