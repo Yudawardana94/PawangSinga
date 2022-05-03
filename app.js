@@ -17,7 +17,7 @@ app.use(express.urlencoded({
 }))
 
 // insert db connection here
-mongoose.connect(process.env.DB_URI, {
+mongoose.connect(process.env.DB_SERVER, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
