@@ -35,7 +35,6 @@ class RestaurantController {
       res.status(500).json(error);
     }
   }
-
   static async search(req,res, next) {
     const searchQuery = {}
     Object.entries(req.query).forEach(el => {
@@ -50,6 +49,18 @@ class RestaurantController {
         status: 200,
         message: "Ok"
       })
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+  static async randomRest(req,res,next) {
+    try {
+     const randomRestaurant = await restaurantModel.aggregate().sample(1)
+     res.status(200).json({
+      data: randomRestaurant,
+      status: 200,
+      message: "Success."
+    })
     } catch (error) {
       res.status(500).json(error);
     }
@@ -165,7 +176,6 @@ class RestaurantController {
     const payload = {
       Visibility: "unlisted"
     }
-    console.log('come hereee')
 
     try {
       await restaurantModel.findByIdAndUpdate(restaurantId, payload, {new: true})
