@@ -67,88 +67,39 @@ class RestaurantController {
   }
 
   // POST METHOD
-  static create(req, res, next) {
+  static async create(req, res, next) {
     let payload = { ...req.body };
-
-    payload.Status = 1;
-    restaurantModel
-      .create(payload)
-      .then((created) => {
-        res.status(201).json({ message: "Created", data: created });
-      })
-      .catch((error) => {
-        res.status(500).json(error);
-      });
+    try {
+      const created = await restaurantModel.create(payload)  
+      res.status(201).json({ message: "Created", data: created });
+    } catch (error) {
+      res.status(500).json(error); 
+    }
   }
 
   static async bulkAdd (req, res, next) {
-    const listdata = [
-      {
-        "Name": "Tempat Coffee",
-        "Address": "Jl. Matoa Raya No., 13, Karangasem, Kec. Laweyan, Kota Surakarta, Jawa Tengah 57145",
-        "Creator": "62277f24cb1947649a456693",
-        "ProfilePicture": "",
-        "Descripton": "Tempat Coffee",
-        "Type" : ["coffee shop"],
-        "PriceRange" : {
-            "min": 10000,
-            "max":  100000
-        },
-        "Notes": "buka jam 10 tutup jam 11",
-        "SocialMedia": [
-          {
-            "socmed": "instagram",
-            "username": "tempat coffee",
-          }
-        ]
-      },
-      {
-        "Name": "Snama kopi",
-        "Address": "Jl. Matoa Raya I, RT.5/RW7, Karangasem, Kec. Laweyan, Kota Surakarta, Jawa Tengah 57145",
-        "Creator": "62277f24cb1947649a456693",
-        "ProfilePicture": "",
-        "Descripton": "Snama kopi",
-        "Type" : ["coffee shop"],
-        "PriceRange" : {
-            "min": 10000,
-            "max":  100000
-        },
-        "Notes": "",
-        "SocialMedia": [
-          {
-            "socmed": "instagram",
-            "username": "snamakopi",
-          }
-        ]
-      },
-      {
-        "Name": "Namdwa kopi",
-        "Address": "Jl. Duwet Raya, Mendungan, Pabelan, Kec. Kartasura, Kabupaten Sukoharjo, Jawa Tengah 57169",
-        "Creator": "62277f24cb1947649a456693",
-        "ProfilePicture": "",
-        "Descripton": "Namdwa kopi",
-        "Type" : ["coffee shop"],
-        "PriceRange" : {
-            "min": 10000,
-            "max":  100000
-        },
-        "Notes": "",
-        "SocialMedia": [
-          {
-            "socmed": "instagram",
-            "username": "namdwakopi",
-          }
-        ]
-      },
-    ]
+    const payload = [...req.body]
 
-    /**
-     * Logic flow
-     * - check if any bulk data is duplicate by data inside the server
-     * - take out duplicate data / make sure that data crated must not be duplicate
-     * - create data
-     * - return number of created data and name of the restaurant
-     */
+    try {
+      const createdData = await restaurantModel.insertMany(payload, {ordered: false})
+      res.status(201).json({ message: "All data ssuccessfully created", data: createdData });
+    } catch (error) {
+      const {writeErrors, insertedDocs} = error
+      if(insertedDocs?.length === 0) res.status(500).json({...error, message: "Failed insert all data"});
+      else {
+        res
+        .status(201)
+        .json({
+          message: `${writeErrors.length} failed to add to database. ${insertedDocs.length} success added to database.`,
+          insertedDocs: insertedDocs.map(({_id, Name, Address}) => {
+            return {_id, Name, Address}
+          }),
+          writeErrors: writeErrors.map(({code, index, errmsg}) => {
+            return {code, index, errmsg}
+          })
+        })
+      }
+    }
   }
 
   // PUT METHOD
