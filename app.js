@@ -16,8 +16,10 @@ app.use(express.urlencoded({
     extended: false
 }))
 
+
 // insert db connection here
-mongoose.connect(process.env.DB_URI, {
+const dbConnect = process.env.NODE_ENV === "prod" ? process.env.DB_URI : process.env.DB_SERVER
+mongoose.connect(dbConnect, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -27,9 +29,15 @@ mongoose.connect(process.env.DB_URI, {
   else console.log('Success connect to mongoose. ')
 })
 
-app.use('/', route)
+// API method using rest API
+app.use('/r', route) 
+
+// API method using GraphQL
+// app.use('/g')
+
+//API method error handler
 // app.use('/', errHandler)
 
 app.listen(port, () => {
-    console.log(`Connected to port: ${port} !!!`)
+    console.log(`Connection to port: ${port} successfully coonected !!!`)
 })

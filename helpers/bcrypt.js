@@ -7,7 +7,6 @@ module.exports = {
         return hashed
     },
     compare : function (plainPassword, hasedPassword) {
-        console.log (plainPassword,hasedPassword)
         let compared = bcrypt.compareSync(plainPassword,hasedPassword)
         return compared
     }

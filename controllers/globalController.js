@@ -9,7 +9,6 @@ class UserController {
   }
 
   static search(req, res, next) {
-    console.log(req, "---requerstx");
     res.send({ status: "hello bosswque" });
   }
 }

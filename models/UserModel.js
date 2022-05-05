@@ -40,7 +40,7 @@ let userSchema = new Schema(
                   }
                 })
                 .catch((err) => {
-                  console.log(err);
+                  res(false);
                 });
             });
           },

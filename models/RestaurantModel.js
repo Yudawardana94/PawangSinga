@@ -4,7 +4,11 @@ const { hash } = require("../helpers/bcrypt");
 
 let restaurantSchema = new Schema(
   {
-    Name: String,
+    Name: {
+      type: String,
+      unique: true,
+      required: [true, "name required."],
+    },
     Address: String,
     Creator: {
       type: Schema.Types.ObjectId,
@@ -17,7 +21,10 @@ let restaurantSchema = new Schema(
       },
     ],
     ProfilePicture: String,
-    Status: Boolean,
+    Status: {
+      type: Boolean,
+      default: true
+    },
     Reviews: [
       {
         type: Schema.Types.ObjectId,
@@ -33,12 +40,24 @@ let restaurantSchema = new Schema(
     Type: [String],
     PriceRange: Object,
     Notes: String,
+    Visibility: {
+      type: String,
+      enum: ["listed", "unlisted"],
+      default: "listed",
+    },
+    SocialMedia: [{
+      type: String
+    }]
   },
   {
     versionKey: false,
     timestamps: true,
   }
 );
+
+restaurantSchema.index({'$**': 'text'});
+restaurantSchema.path('Name').index({ unique: true });
+
 
 let Restaurant = mongoose.model("Restaurant", restaurantSchema);
 

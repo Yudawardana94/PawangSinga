@@ -16,7 +16,6 @@ class UserController {
   }
 
   static async create(req, res, next) {
-    console.log(req.body);
     const { userName, firstName, lastName, email, password, role } = req.body;
     let newUser = { userName, firstName, lastName, email, password, role };
     userModel
@@ -31,11 +30,7 @@ class UserController {
   }
 
   static update(req, res, next) {
-    console.log(req.body, "--- in body");
     const { id } = req.params;
-    console.log(id, "--- in params");
-    // console.tron.log(id);
-    // res.send("updated");
     userModel
       .findByIdAndUpdate(id, req.body)
       .then((updated) => {

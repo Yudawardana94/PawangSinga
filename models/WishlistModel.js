@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { hash } = require("../helpers/bcrypt");
 
 let wishlistSchema = new Schema(
   {
-    Title: String,
+    Name: {
+      type: String,
+      required: true,
+    },
     RestaurantId: String,
     CreatorId: {
       type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     Tags: [
@@ -15,8 +18,15 @@ let wishlistSchema = new Schema(
         type: String,
       },
     ],
-    Address: String,
-    Status: Boolean,
+    Address: {
+      type: String,
+      required: true
+    },
+    Status: {
+      type: String,
+      enum: ["listed", "conquered", "unlisted"],
+      default: "listed",
+    },
   },
   {
     timestamps: true,
