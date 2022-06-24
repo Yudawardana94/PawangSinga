@@ -14,6 +14,7 @@ router.use("/dailyNeed", DailyNeedAppRouter);
 
 router.use("/user", userRoutes);
 router.use("/s22", (_, res) => {
+  console.log('helld')
   const object = {
     status: "Connected",
     message: "Server status active",
