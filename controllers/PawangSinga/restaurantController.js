@@ -36,6 +36,19 @@ class RestaurantController {
     }
   }
 
+  static async randomRest(req, res, next) {
+    try {
+      const randomRest = await restaurantModel.aggregate().sample(1);
+      res.status(200).json({
+        data: randomRest,
+        status: 200,
+        message: "Ok",
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+
   static async search(req, res, next) {
     const searchQuery = {};
     Object.entries(req.query).forEach((el) => {
