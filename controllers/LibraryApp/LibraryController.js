@@ -10,7 +10,7 @@ class LibraryAppsController {
       let data = {};
       switch (req.query.q) {
         case "library":
-          data = await LibraryModel.find();
+          data = await LibraryModel.find().populate("Kepustakaan Pembimbing Division");
           break;
         case "pembimbing":
           data = await PembimbingModel.find();
