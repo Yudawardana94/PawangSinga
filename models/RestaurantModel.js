@@ -55,7 +55,7 @@ let restaurantSchema = new Schema(
   }
 );
 
-restaurantSchema.index({'$**': 'text'});
+restaurantSchema.index({ '$**': 'text' });
 restaurantSchema.path('Name').index({ unique: true });
 
 
