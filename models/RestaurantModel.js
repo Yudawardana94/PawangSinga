@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { hash } = require("../helpers/bcrypt");
 
 let restaurantSchema = new Schema(
   {
