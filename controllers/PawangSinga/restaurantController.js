@@ -5,10 +5,10 @@ class RestaurantController {
   static async findAll(req, res, next) {
     try {
       const restaurants = await restaurantModel.find({
-        Visibility: {
+        isListed: {
           $ne: "Unlisted",
         },
-      });
+      }).populate('creator', 'id username email role');
 
       res.status(200).json({
         data: restaurants,
@@ -74,6 +74,8 @@ class RestaurantController {
     let payload = { ...req.body };
     try {
       const created = await restaurantModel.create(payload);
+
+      // TODO: need to create new database for restaurant type, so we could find and change it separately
       res.status(201).json({ message: "Created", data: created });
     } catch (error) {
       res.status(500).json(error);

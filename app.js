@@ -19,10 +19,8 @@ app.use(
 );
 
 // insert db connection here
-const dbConnect =
-  process.env.NODE_ENV === "prod"
-    ? process.env.DB_SERVER //PROD
-    : process.env.DB_SERVER; // DEV
+const dbConnect = process.env.DB_SERVER ?? `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}${process.env.DB_CLUSTER}`;
+
 mongoose.connect(
   dbConnect,
   {
@@ -38,14 +36,19 @@ mongoose.connect(
 );
 
 // API method using rest API
-app.use("/r", route);
+app.use("/api/v1", route);
 
 // API method using GraphQL
-// app.use('/g')
+// app.use('/api/v1/g')
 
 //API method error handler
 // app.use('/', errHandler)
+app.use('/*', (req, res) => {
+  res.status(404).send({
+    message: 'you api/v1 on the route',
+  });
+});
 
 app.listen(port, () => {
-  console.log(`Connection to port: ${port} successfully coonected !!!`);
+  console.log(`Connected to this url : http://localhost:${port}`);
 });

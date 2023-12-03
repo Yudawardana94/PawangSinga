@@ -4,21 +4,13 @@ const { hash } = require("../helpers/bcrypt");
 
 let userSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
-      required: [true, `required userName`],
-    },
-    firstName: {
-      type: String,
-      required: [true, `required firstName`],
-    },
-    lastName: {
-      type: String,
-      required: [true, `required lastName`],
+      required: [true, `required username`],
     },
     email: {
       type: String,
-      required: [true, `required email`],
+      // required: [false, `required email`],
       validate: [
         {
           validator: function (val) {
