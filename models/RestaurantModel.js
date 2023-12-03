@@ -7,12 +7,13 @@ let restaurantSchema = new Schema(
     name: {
       type: String,
       unique: true,
-      required: [true, "name required."],
+      required: [true, 'name required.'],
     },
     address: String,
+    region: String,
     creator: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     photos: [
@@ -22,12 +23,12 @@ let restaurantSchema = new Schema(
     ],
     status: {
       type: Boolean,
-      default: true
+      default: true,
     },
     reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "comment",
+        ref: 'comment',
       },
     ],
     menus: [
@@ -36,17 +37,20 @@ let restaurantSchema = new Schema(
       },
     ],
     description: String,
-    type: [String],
+    type: [String], // it has to be reference to restaurant type collection
+    tags: [String], // it has to be reference to tags collection
     priceRange: Object,
     notes: String,
     isListed: {
       type: String,
-      enum: ["listed", "unlisted"],
-      default: "listed",
+      enum: ['listed', 'unlisted'],
+      default: 'listed',
     },
-    socialMedia: [{
-      type: String
-    }]
+    socialMedia: [
+      {
+        type: String,
+      },
+    ],
   },
   {
     versionKey: false,
