@@ -2,11 +2,11 @@
   "name": "pawangsinga",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "NODE_ENV=development node app.js",
-    "dev": "NODE_ENV=development nodemon app.js",
-    "prod": "NODE_ENV=production nodemon app.js",
+    "start": "NODE_ENV=development node api/index.js",
+    "dev": "NODE_ENV=development nodemon api/index.js",
+    "prod": "NODE_ENV=production nodemon api/index.js",
     "lint": "echo 'Linting!'",
     "build": "echo 'Running a build!'",
     "test": "echo 'Running unit tests!'"
