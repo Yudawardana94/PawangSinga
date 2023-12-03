@@ -19,7 +19,7 @@ app.use(
 );
 
 // insert db connection here
-const dbConnect = process.env.DB_SERVER ?? `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}${process.env.DB_CLUSTER}`;
+const dbConnect = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}${process.env.DB_CLUSTER}`;
 
 mongoose.connect(
   dbConnect,
