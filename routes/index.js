@@ -16,14 +16,14 @@ router.use("/library", LibraryAppRouter);
 
 router.use("/user", userRoutes);
 router.use("/s22", (_, res) => {
-  console.log('helld')
   const object = {
     status: "Connected",
     message: "Server status active",
   };
   res.send(object);
 });
-router.get("/", (req, res) => {
+
+router.get("/*", (req, res) => {
   res.send("use localhost:3000/pawangSinga");
 });
 

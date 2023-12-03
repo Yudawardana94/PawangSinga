@@ -16,8 +16,8 @@ class UserController {
   }
 
   static async create(req, res, next) {
-    const { userName, firstName, lastName, email, password, role } = req.body;
-    let newUser = { userName, firstName, lastName, email, password, role };
+    const { username, email, password, role } = req.body;
+    let newUser = { username, email, password, role };
     userModel
       .create(newUser)
       .then((created) => {

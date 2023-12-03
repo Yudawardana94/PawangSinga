@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+
 let LibrarySchema = new Schema(
   {
     Writer: {
@@ -13,16 +14,16 @@ let LibrarySchema = new Schema(
     },
     Kepustakaan: {
       type: Schema.Types.ObjectId,
-      ref: "kepustakaan",
+      ref: "Kepustakaan",
       required: true,
     },
     Pembimbing: {
       type: Schema.Types.ObjectId,
-      ref: "pembimbing",
+      ref: "Pembimbing",
     },
     Division: {
       type: Schema.Types.ObjectId,
-      ref: "division",
+      ref: "Division",
       required: true,
     },
     DateSubmit: {

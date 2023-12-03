@@ -4,50 +4,53 @@ const { hash } = require("../helpers/bcrypt");
 
 let restaurantSchema = new Schema(
   {
-    Name: {
+    name: {
       type: String,
       unique: true,
-      required: [true, "name required."],
+      required: [true, 'name required.'],
     },
-    Address: String,
-    Creator: {
+    address: String,
+    region: String,
+    creator: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: 'User',
       required: true,
     },
-    Photos: [
+    photos: [
       {
         type: Schema.Types.String,
       },
     ],
-    ProfilePicture: String,
-    Status: {
+    status: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    Reviews: [
+    reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "comment",
+        ref: 'comment',
       },
     ],
-    Menu: [
+    menus: [
       {
         type: Schema.Types.String,
       },
     ],
-    Description: String,
-    Type: [String],
-    PriceRange: Object,
-    Notes: String,
-    Visibility: {
+    description: String,
+    type: [String], // it has to be reference to restaurant type collection
+    tags: [String], // it has to be reference to tags collection
+    priceRange: Object,
+    notes: String,
+    isListed: {
       type: String,
-      enum: ["listed", "unlisted"],
-      default: "listed",
+      enum: ['listed', 'unlisted'],
+      default: 'listed',
     },
-    SocialMedia: [{
-      type: String
-    }]
+    socialMedia: [
+      {
+        type: String,
+      },
+    ],
   },
   {
     versionKey: false,
@@ -55,10 +58,10 @@ let restaurantSchema = new Schema(
   }
 );
 
-restaurantSchema.index({'$**': 'text'});
-restaurantSchema.path('Name').index({ unique: true });
+restaurantSchema.index({ '$**': 'text' });
+restaurantSchema.path('name').index({ unique: true });
 
 
-let Restaurant = mongoose.model("Restaurant", restaurantSchema);
+const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 module.exports = Restaurant;
