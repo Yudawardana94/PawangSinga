@@ -3,6 +3,7 @@ const restaurantModel = require("../../models/RestaurantModel");
 class RestaurantController {
   // GET METHOD
   static async findAll(req, res, next) {
+    console.log('[LOGGING] - PAWANGSINGA - start find all restaurants data')
     try {
       const restaurants = await restaurantModel.find({
         isListed: {
@@ -10,12 +11,17 @@ class RestaurantController {
         },
       }).populate('creator', 'id username email role');
 
+      console.log('[LOGGING] - PAWANGSINGA - process find all restaurants data' + restaurants);
       res.status(200).json({
         data: restaurants,
         status: 200,
         message: "Ok",
       });
     } catch (error) {
+      console.log(
+        '[LOGGING] - PAWANGSINGA - error find all restaurants data' +
+          error
+      );
       res.status(500).json(error);
     }
   }
